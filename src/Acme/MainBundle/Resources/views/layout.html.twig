@@ -70,7 +70,11 @@
         </div>
     </div>
 </div>
-{% render "symfony_cmf_create.jsloader.controller:includeJSFilesAction" %}
+{% if is_granted('ROLE_ADMIN') %}	
+    {% include "SymfonyCmfCreateBundle::includecssfiles.html.twig" %}
+    {{ render(controller("symfony_cmf_create.jsloader.controller:includeJSFilesAction")) }}
+    {# render "symfony_cmf_create.jsloader.controller:includeJSFilesAction" #}
+{% endif %}
 </body>
 </html>
 

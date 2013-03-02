@@ -15,10 +15,35 @@ static:
     defaults:
         _controller: AcmeMainBundle:Demo:static
     requirements:
-        _locale: en|de
+        _locale: en|fr
 
 cmf_create_rest:
     resource: "@SymfonyCmfCreateBundle/Resources/config/routing/rest.xml"
 
 cmf_create_image:
     resource: "@SymfonyCmfCreateBundle/Resources/config/routing/image.xml"
+#
+# Admin routes (Sonata)
+#
+admin:
+    resource: '@SonataAdminBundle/Resources/config/routing/sonata_admin.xml'
+    prefix: /admin
+ 
+_sonata_admin:
+    resource: .
+    type: sonata_admin
+    prefix: /admin
+
+fos_js_routing:
+    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
+
+symfony_cmf_tree:
+    resource: .
+    type: 'symfony_cmf_tree'
+    
+#sonata_phpcr_tree:
+#    resource: '@SonataDoctrinePHPCRAdminBundle/Resources/config/routing/tree.xml'
+#    prefix: /admin
+#sonata_phpcr_odmbrowser:
+#    resource: '@SonataDoctrinePHPCRAdminBundle/Resources/config/routing/phpcrodmbrowser.xml'
+#    prefix: /admin

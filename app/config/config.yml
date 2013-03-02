@@ -1,5 +1,6 @@
 imports:
     - { resource: parameters.yml }
+    - { resource: security.yml }
 
 framework:
     #esi:             ~
@@ -83,14 +84,26 @@ symfony_cmf_simple_cms:
             Symfony\Cmf\Bundle\RoutingExtraBundle\Document\RedirectRoute:  symfony_cmf_routing_extra.redirect_controller:redirectAction
     multilang:
         locales: %locales%
-    use_sonata_admin: false
+    use_sonata_admin: true
 
 knp_menu:
     twig: true
 
 symfony_cmf_menu:
-    use_sonata_admin: false
-    menu_basepath: /cms
+    use_sonata_admin: true
+    menu_basepath:        /cms
+    document_manager_name:  default
+    admin_class:          ~
+    document_class:       ~
+    content_url_generator:  router
+    content_key:          ~ # (resolves to DynamicRouter::CONTENT_KEY)
+    route_name:           ~ # cmf routes are created by content instead of name
+    content_basepath:     ~ # defaults to symfony_cmf_core.content_basepath
+    multilang:
+        use_sonata_admin:     true # use true/false to force using / not using sonata admin
+        admin_class:          ~
+        document_class:       ~
+        locales: %locales%
 
 symfony_cmf_create:
     phpcr_odm: true
@@ -102,3 +115,71 @@ lunetics_locale:
         - router
         - browser
     allowed_locales: %locales%
+#
+# Sonata Admin configuration
+#
+sonata_block:
+    default_contexts: [cms]
+    blocks:
+        sonata.admin.block.admin_list:
+            contexts:   [admin]
+        sonata_admin_doctrine_phpcr.tree_block:
+            settings:
+                id: '/cms'
+            contexts:   [admin]
+
+sonata_admin:
+    templates:
+        # default global templates
+        ajax:    SonataAdminBundle::ajax_layout.html.twig
+    dashboard:
+        blocks:
+            # display a dashboard block
+            - { position: right, type: sonata.admin.block.admin_list }
+            - { position: left, type: sonata_admin_doctrine_phpcr.tree_block }
+
+sonata_doctrine_phpcr_admin:
+    document_tree:
+        Doctrine\PHPCR\Odm\Document\Generic:
+            valid_children:
+                - all
+        Symfony\Cmf\Bundle\SimpleCmsBundle\Document\Page: ~
+        Symfony\Cmf\Bundle\RoutingExtraBundle\Document\Route:
+            valid_children:
+                - Symfony\Cmf\Bundle\RoutingExtraBundle\Document\Route
+                - Symfony\Cmf\Bundle\RoutingExtraBundle\Document\RedirectRoute
+        Symfony\Cmf\Bundle\RoutingExtraBundle\Document\RedirectRoute:
+            valid_children: []
+        Symfony\Cmf\Bundle\MenuBundle\Document\MenuNode:
+            valid_children:
+                - Symfony\Cmf\Bundle\MenuBundle\Document\MenuNode
+                - Symfony\Cmf\Bundle\MenuBundle\Document\MultilangMenuNode
+        Symfony\Cmf\Bundle\MenuBundle\Document\MultilangMenuNode:
+            valid_children:
+                - Symfony\Cmf\Bundle\MenuBundle\Document\MenuNode
+                - Symfony\Cmf\Bundle\MenuBundle\Document\MultilangMenuNode
+
+fos_js_routing:
+    routes_to_expose:
+        - admin_sandbox_main_editablestaticcontent_create
+        - admin_sandbox_main_editablestaticcontent_delete
+        - admin_sandbox_main_editablestaticcontent_edit
+        - admin_bundle_menu_menunode_create
+        - admin_bundle_menu_menunode_delete
+        - admin_bundle_menu_menunode_edit
+        - admin_bundle_menu_multilangmenunode_create
+        - admin_bundle_menu_multilangmenunode_delete
+        - admin_bundle_menu_multilangmenunode_edit
+        - admin_bundle_content_multilangstaticcontent_create
+        - admin_bundle_content_multilangstaticcontent_delete
+        - admin_bundle_content_multilangstaticcontent_edit
+        - admin_bundle_routingextra_route_create
+        - admin_bundle_routingextra_route_delete
+        - admin_bundle_routingextra_route_edit
+        - admin_bundle_simplecms_page_create
+        - admin_bundle_simplecms_page_delete
+        - admin_bundle_simplecms_page_edit
+        - symfony_cmf_tree_browser.phpcr_children
+        - symfony_cmf_tree_browser.phpcr_move
+        - sonata.admin.doctrine_phpcr.phpcrodm_children
+        - sonata.admin.doctrine_phpcr.phpcrodm_move

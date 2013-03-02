@@ -32,6 +32,17 @@ class AppKernel extends Kernel
 
             // and the sandbox bundle
             new Acme\MainBundle\AcmeMainBundle(),
+            
+            // support for the admin
+            new Symfony\Cmf\Bundle\TreeBrowserBundle\SymfonyCmfTreeBrowserBundle(),
+            new Sonata\jQueryBundle\SonatajQueryBundle(),
+            new Sonata\BlockBundle\SonataBlockBundle(),
+            new Sonata\AdminBundle\SonataAdminBundle(),
+            new Sonata\DoctrinePHPCRAdminBundle\SonataDoctrinePHPCRAdminBundle(),
+            new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
+            
+            //Security bundle            
+            new \Symfony\Bundle\SecurityBundle\SecurityBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
