@@ -60,9 +60,15 @@ doctrine_phpcr:
         locales:
             en:
                 - en
+                - fr
+                - de
+            fr:
+                - fr
+                - en
                 - de
             de:
                 - de
+                - fr
                 - en
 
 liip_doctrine_cache:
@@ -77,6 +83,7 @@ symfony_cmf_routing_extra:
         enabled: true
 
 symfony_cmf_simple_cms:
+    basepath: "/cms"
     routing:
         templates_by_class:
             Symfony\Cmf\Bundle\SimpleCmsBundle\Document\Page:  SymfonyCmfSimpleCmsBundle:Page:index.html.twig
@@ -88,10 +95,11 @@ symfony_cmf_simple_cms:
 
 knp_menu:
     twig: true
-
+symfony_cmf_content:
+    static_basepath: /cms/content
 symfony_cmf_menu:
     use_sonata_admin: true
-    menu_basepath:        /cms
+    menu_basepath:        /cms/menu
     document_manager_name:  default
     admin_class:          ~
     document_class:       ~
@@ -125,7 +133,7 @@ sonata_block:
             contexts:   [admin]
         sonata_admin_doctrine_phpcr.tree_block:
             settings:
-                id: '/cms'
+                id: '/cms/block'
             contexts:   [admin]
 
 sonata_admin:
@@ -158,7 +166,7 @@ sonata_doctrine_phpcr_admin:
             valid_children:
                 - Symfony\Cmf\Bundle\MenuBundle\Document\MenuNode
                 - Symfony\Cmf\Bundle\MenuBundle\Document\MultilangMenuNode
-
+                
 fos_js_routing:
     routes_to_expose:
         - admin_sandbox_main_editablestaticcontent_create

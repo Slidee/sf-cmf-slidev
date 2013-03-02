@@ -12,6 +12,10 @@ use Symfony\Cmf\Bundle\SimpleCmsBundle\Document\MultilangRoute;
 
 use Symfony\Cmf\Bundle\MenuBundle\Document\MultilangMenuNode;
 
+use PHPCR\Util\NodeHelper;
+//use Symfony\Cmf\Bundle\BlockBundle\Document\SimpleBlock;
+use Symfony\Cmf\Bundle\ContentBundle\Document\StaticContent;
+
 class LoadSimpleCmsData extends LoadCmsData
 {
     private $yaml;
@@ -71,5 +75,35 @@ class LoadSimpleCmsData extends LoadCmsData
         }
 
         $dm->flush();
+        
+        
+        ///
+        ///Override to create static blocs samples
+        ///
+        
+        $manager = $dm;
+        // Get the base path name to use from the configuration
+        $session = $manager->getPhpcrSession();
+        $basepath = $this->container->getParameter('symfony_cmf_content.static_basepath');
+
+        // Create the path in the repository
+        NodeHelper::createPath($session, $basepath);
+
+        // Create a new document using StaticContent from the CMF ContentBundle
+        $document = new StaticContent();
+        $document->setPath($basepath . '/blocks');
+        $manager->persist($document);
+
+        // Create a new SimpleBlock (see http://symfony.com/doc/master/cmf/bundles/block.html#block-types)
+        /*$myBlock = new SimpleBlock();
+        $myBlock->setParentDocument($document);
+        $myBlock->setName('testBlock');
+        $myBlock->setTitle('CMF BlockBundle and ContentBundle');
+        $myBlock->setContent('Block from CMF BlockBundle, parent from CMF ContentBundle (StaticContent).');
+        $manager->persist($myBlock);*/
+
+        // Commit $document and $block to the database
+        $manager->flush();
+       
     }
 }
