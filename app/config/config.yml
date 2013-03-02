@@ -133,7 +133,7 @@ sonata_block:
             contexts:   [admin]
         sonata_admin_doctrine_phpcr.tree_block:
             settings:
-                id: '/cms/block'
+                id: '/cms'
             contexts:   [admin]
 
 sonata_admin:
