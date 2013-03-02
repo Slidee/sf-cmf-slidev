@@ -83,7 +83,7 @@ symfony_cmf_routing_extra:
         enabled: true
 
 symfony_cmf_simple_cms:
-    basepath: "/cms"
+    basepath: /cms/simple
     routing:
         templates_by_class:
             Symfony\Cmf\Bundle\SimpleCmsBundle\Document\Page:  SymfonyCmfSimpleCmsBundle:Page:index.html.twig
@@ -96,17 +96,17 @@ symfony_cmf_simple_cms:
 knp_menu:
     twig: true
 symfony_cmf_content:
-    static_basepath: /cms/content
+    static_basepath: /cms
 symfony_cmf_menu:
     use_sonata_admin: true
-    menu_basepath:        /cms/menu
+    menu_basepath:        /cms
     document_manager_name:  default
     admin_class:          ~
     document_class:       ~
     content_url_generator:  router
     content_key:          ~ # (resolves to DynamicRouter::CONTENT_KEY)
     route_name:           ~ # cmf routes are created by content instead of name
-    content_basepath:     ~ # defaults to symfony_cmf_core.content_basepath
+    content_basepath:     /cms # defaults to symfony_cmf_core.content_basepath
     multilang:
         use_sonata_admin:     true # use true/false to force using / not using sonata admin
         admin_class:          ~
@@ -133,7 +133,7 @@ sonata_block:
             contexts:   [admin]
         sonata_admin_doctrine_phpcr.tree_block:
             settings:
-                id: '/cms'
+                id: '/'
             contexts:   [admin]
 
 sonata_admin:

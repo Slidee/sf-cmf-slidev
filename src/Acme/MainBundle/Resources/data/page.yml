@@ -4,9 +4,11 @@ static:
         title:
             en: "Welcome to the CMF Standard Edition"
             de: "Willkommen zur CMF Standard Edition"
+            fr: "Bienvenu sur l'edition standard de CMF"
         body: 
             en: "This is should get you started with the Symfony CMF."
             de: "Dies sollte Ihnen einen Einstieg in das Symfony CMF bieten."
+            fr: "Cela devrai vous permettre de démarrer avec le CMF Symfony"
 
     about:
         name: "about"
@@ -25,6 +27,7 @@ static:
         label:
             en: "Map"
             de: "Karte"
+            fr: "Carte"
         parent: "/contact"
         title:
             en: "A map of a location in the US"
