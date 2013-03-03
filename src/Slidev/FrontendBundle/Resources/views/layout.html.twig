@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content=" minimum-scale=1.0, maximum-scale=1.0, width=device-width; user-scalable=no">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>{% block title %}{{ title|default('SL-iDev - Sylvain LABRE - Innovative Developments')|striptags }}{% endblock %}</title>
+
+    {% block includes %}
+        {% include "SymfonyCmfCreateBundle::includecssfiles.html.twig" %}
+    
+        <link href="{{ asset('bundles/slidevfrontend/foundation/css/foundation.min.css') }}" type="text/css" rel="stylesheet"/>
+        <link href="{{ asset('bundles/slidevfrontend/css/style.css') }}" type="text/css" rel="stylesheet"/>
+
+        <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+        <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+        
+        <script type="text/javascript" src="{{ asset('bundles/slidevfrontend/foundation/js/vendor/custom.modernizr.js') }}" ></script>
+    {% endblock %}
+</head>
+<body class="row">
+    <div class="row" id="header">
+        <nav class="top-bar">
+            <ul class="title-area">
+                <li class="name">
+                    <a href="/"><img id="logo" src="{{ asset('bundles/slidevfrontend/img/logo.png') }}" alt="SL-iDev logo"/></a>
+                </li>
+                <li class="toggle-topbar menu-icon">
+                    <a href="#"><span>Menu</span></a>
+                </li>
+            </ul>
+            
+            {% block navigation %}
+                <section class="top-bar-section">
+                {{ knp_menu_render('slidev', { 'template': 'SlidevFrontendBundle:Menu:main_menu.html.twig' }) }}
+                </section>
+            {% endblock %}
+        </nav>
+    </div>
+
+    <div class="row" id="content">
+        {% block content %}
+        {% endblock %}
+    </div>
+    <div id="footer" class="row">
+        <div id="language_selector" class="large-12 columns pull-right">
+            {% block language_selector %}
+                {{ locale_switcher() }}
+            {% endblock %}
+        </div>
+    </div>
+            
+    {% block javascript_includes %}
+        <script>
+          document.write('<script type="text/javascript" src="' +
+          ('__proto__' in {} ? "{{ asset('bundles/slidevfrontend/foundation/js/vendor/zepto.js')}}" : "{{ asset('bundles/slidevfrontend/foundation/js/vendor/jquery.js')}}") +
+          '"><\/script>')
+        </script>
+        <script type="text/javascript" src="{{ asset('bundles/slidevfrontend/foundation/js/foundation.min.js') }}" ></script>
+        <script>
+        $(document).foundation();
+        </script>
+
+        {% if is_granted('ROLE_ADMIN') %}	
+            {% render(controller("symfony_cmf_create.jsloader.controller:includeJSFilesAction")) %}
+        {% endif %}
+    {% endblock %}
+</body>
+</html>
+

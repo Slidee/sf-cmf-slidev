@@ -22,16 +22,8 @@ assetic:
     debug:          %kernel.debug%
     use_controller: false
     #bundles:        [SymfonyCmfSimpleCmsBundle, SymfonyCmfCreateBundle]
-    #java: /usr/bin/java
     filters:
         cssrewrite: ~
-        #lessphp:
-            #file: %kernel.root_dir%/../vendor/leafo/lessphp/lessc.inc.php
-            #apply_to: "\.less$"
-        #closure:
-        #    jar: %kernel.root_dir%/Resources/java/compiler.jar
-        #yui_css:
-        #    jar: %kernel.root_dir%/Resources/java/yuicompressor-2.4.7.jar
 
 # for jackalope-doctrine-dbal
 doctrine:
@@ -61,29 +53,26 @@ doctrine_phpcr:
             en:
                 - en
                 - fr
-                - de
             fr:
                 - fr
                 - en
-                - de
-            de:
-                - de
-                - fr
-                - en
-
 liip_doctrine_cache:
     namespaces:
         meta:
             type: file_system
         nodes:
             type: file_system
-
+knp_menu:
+    twig: true
+##
+## Symfony CMF Configuration
+##
 symfony_cmf_routing_extra:
     dynamic:
         enabled: true
 
 symfony_cmf_simple_cms:
-    basepath: /cms/simple
+    basepath: /cms/slidev
     routing:
         templates_by_class:
             Symfony\Cmf\Bundle\SimpleCmsBundle\Document\Page:  SymfonyCmfSimpleCmsBundle:Page:index.html.twig
@@ -93,8 +82,6 @@ symfony_cmf_simple_cms:
         locales: %locales%
     use_sonata_admin: true
 
-knp_menu:
-    twig: true
 symfony_cmf_content:
     static_basepath: /cms
 symfony_cmf_menu:
@@ -127,7 +114,7 @@ lunetics_locale:
 # Sonata Admin configuration
 #
 sonata_block:
-    default_contexts: [cms]
+    default_contexts: [/]
     blocks:
         sonata.admin.block.admin_list:
             contexts:   [admin]

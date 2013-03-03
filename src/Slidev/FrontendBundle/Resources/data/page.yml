@@ -1,0 +1,48 @@
+static:
+    home:
+        name: ""
+        title:
+            en: "Sylvain LABRE - Innovative Development"
+            fr: "Sylvain LABRE - Innovative Development"
+        body: 
+            en: "Welcome on my website"
+            fr: "Bienvenu sur mon site internet"
+    
+    portfolio:
+        name: "CV"
+        label: "CV"
+        title:
+            en: "Curriculum Vitae"
+            fr: "Curriculum Vitae"
+        body: 
+            en: "My CV Will be based on 4 elements : Studies, Experiences, Skills, Technologies"
+            fr: "Mon CV devra être construit a partir de 4 elements : Formations, Expériences, Compétences, Technologies"
+            
+    portfolio:
+        name: "portfolio"
+        label: "Portfolio"
+        title:
+            en: "My Portfolio"
+            fr: "Mon Portfolio"
+        body: 
+            en: "Here is the list of all my realisations for web and mobile technologies"
+            fr: "Ici vous trouverez la liste de mes réalisations dans les milieux du web et du mobile"
+    profile:
+        name: "profile"
+        label: "Profil"
+        title:
+            en: "About Me"
+            fr: "Profil"
+        body: 
+            en: "Here are all i do away from my keyboard (not really fare :p)"
+            fr: "Tout le reste de ma vie"
+
+    contact:
+        name: "contact"
+        label: "Contact"
+        title:
+            en: "Contact"
+            fr: "Me contacter"
+        body: 
+            en: "The contact form so you can send me some infos"
+            fr: "Contactez moi via le formulaire ci dessous"

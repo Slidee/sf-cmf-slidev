@@ -31,7 +31,7 @@ class AppKernel extends Kernel
             new Symfony\Cmf\Bundle\CreateBundle\SymfonyCmfCreateBundle(),
 
             // and the sandbox bundle
-            new Acme\MainBundle\AcmeMainBundle(),
+            //new Acme\MainBundle\AcmeMainBundle(),
             
             // support for the admin
             new Symfony\Cmf\Bundle\TreeBrowserBundle\SymfonyCmfTreeBrowserBundle(),
@@ -43,6 +43,9 @@ class AppKernel extends Kernel
             
             //Security bundle            
             new \Symfony\Bundle\SecurityBundle\SecurityBundle(),
+            
+            //Slidev Bundle
+            new Slidev\FrontendBundle\SlidevFrontendBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
